@@ -1,14 +1,12 @@
 const path = require("path");
 require("dotenv").config();
-const { DEVELOPMENT_DATABASE_URL } = process.env;
+
+console.log("DEVELOPMENT_DATABASE_URL:", process.env.DEVELOPMENT_DATABASE_URL); // Debugging: check if URL is loaded
 
 module.exports = {
   development: {
-    client: 'pg',  // Use 'pg' as shorthand for PostgreSQL
-    connection: {
-      connectionString: DEVELOPMENT_DATABASE_URL,
-      ssl: { rejectUnauthorized: false }  // For Render's SSL requirement
-    },
+    client: 'pg',  // Use 'pg' for PostgreSQL
+    connection: process.env.DEVELOPMENT_DATABASE_URL + "?ssl=true", // Add ssl parameter directly to the URL
     migrations: {
       directory: path.join(__dirname, "src", "db", "migrations"),
     },
