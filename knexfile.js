@@ -1,12 +1,12 @@
 const path = require("path");
-require("dotenv").config();
+require("dotenv").config();  // Ensure environment variables are loaded
 
-console.log("DEVELOPMENT_DATABASE_URL:", process.env.DEVELOPMENT_DATABASE_URL); // Debugging: Confirm URL
+console.log("DEVELOPMENT_DATABASE_URL:", process.env.DEVELOPMENT_DATABASE_URL); // Debugging line to confirm URL
 
 module.exports = {
   development: {
-    client: 'pg',  // Ensure this is 'pg' for PostgreSQL
-    connection: process.env.DEVELOPMENT_DATABASE_URL, // Pass URL directly
+    client: 'pg',  // PostgreSQL uses 'pg' as the client name
+    connection: process.env.DEVELOPMENT_DATABASE_URL,  // Directly pass the URL
     migrations: {
       directory: path.join(__dirname, "src", "db", "migrations"),
     },
