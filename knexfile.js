@@ -1,17 +1,19 @@
 const path = require("path");
 require("dotenv").config();
-const { DATABASE_URL } = process.env;
+const { DEVELOPMENT_DATABASE_URL } = process.env;
 
 module.exports = {
-
   development: {
     client: 'postgresql',
-    connection: DATABASE_URL,
-      migrations: {
-            directory: path.join(__dirname, "src", "db", "migrations"),
-          },
-      seeds: {
-            directory: path.join(__dirname, "src", "db", "seeds"),
-           },
+    connection: {
+      connectionString: DEVELOPMENT_DATABASE_URL,
+      ssl: { rejectUnauthorized: false } // required for Render
+    },
+    migrations: {
+      directory: path.join(__dirname, "src", "db", "migrations"),
+    },
+    seeds: {
+      directory: path.join(__dirname, "src", "db", "seeds"),
+    },
   },
 };
